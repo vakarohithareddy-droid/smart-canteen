@@ -34,7 +34,7 @@
 2. Set Root Directory to `frontend`
 3. No build command needed (plain HTML/JS)
 4. In `frontend/app.js`, the API URL is already dynamic:
-   - Local dev: uses `http://localhost:5001/api`
+   - Local dev: uses process.env.REACT_APP_API_URL + "/api"
    - Production: uses `/api` (same origin — but for Vercel you'll need CORS)
 5. ⚠️ For separate deployments: update `BACKEND_PORT` to your Render URL
 
@@ -93,7 +93,7 @@ npm install
 npm run dev    # uses nodemon
 ```
 
-Open `http://localhost:5001` in your browser.
+Open process.env.REACT_APP_API_URL + "/api" in your browser.
 
 **Seed the menu (first run only):**
 ```

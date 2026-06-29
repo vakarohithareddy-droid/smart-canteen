@@ -63,7 +63,7 @@ const PORT = process.env.PORT || 5001;
 
 connectDB().then(() => {
   server.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on ${process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`}`);
     console.log(`📡 Socket.IO ready`);
     console.log(`✅ SmartCanteen ready`);
   });

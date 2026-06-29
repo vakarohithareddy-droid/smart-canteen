@@ -13,11 +13,16 @@
 // ── API + Socket setup ──────────────────────────────────────
 // Backend always runs on port 5001. Use absolute URL for local dev,
 // relative paths for production deployment.
+
 const BACKEND_PORT = 5001;
 const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const API_URL = isLocal
+  ? 'http://localhost:' + BACKEND_PORT + '/api'
+  : process.env.REACT_APP_API_URL + '/api';
 
-const API_URL    = isLocal ? 'http://localhost:' + BACKEND_PORT + '/api' : '/api';
-const SOCKET_URL = isLocal ? 'http://localhost:' + BACKEND_PORT : window.location.origin;
+const SOCKET_URL = isLocal
+  ? 'http://localhost:' + BACKEND_PORT
+  : process.env.REACT_APP_API_URL;
 
 // CHANGE 5: Connect Socket.IO from CDN
 const socket = io(SOCKET_URL);
