@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartCanteen — Pre-Order & Skip the Queue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── Nav ───────────────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a class="nav-logo" onclick="goPage('home')" href="#" role="link">
+      <div class="nav-logo-icon">🥗</div>
+      <div>
+        <div class="nav-logo-text">SmartCanteen</div>
+        <div class="nav-logo-sub">Pre-order &amp; skip the queue</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link active" onclick="goPage('home')" href="#" id="nav-home">Home</a>
+      <a class="nav-link" onclick="goPage('menu')" href="#" id="nav-menu">Menu</a>
+      <a class="nav-link" onclick="goPage('orders')" href="#" id="nav-orders">My Orders</a>
+      <a class="nav-link admin-only" onclick="goPage('analytics')" href="#" id="nav-analytics" style="display:none">Analytics</a>
+      <a class="nav-link admin-only" onclick="goPage('admin')" href="#" id="nav-admin" style="display:none">Admin</a>
+    </div>
+    <div class="nav-actions">
+      <div class="cart-icon" onclick="goPage('cart')" title="Cart" role="button" tabindex="0" aria-label="View cart">
+        🛒 <span class="cart-badge" id="cart-badge">0</span>
+      </div>
+      <span id="nav-user-badge" style="display:none;font-size:13px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--green-light);color:var(--green)"></span>
+      <button class="btn btn-secondary btn-sm" onclick="openLogin()" id="login-btn">Sign in</button>
+      <button class="btn btn-primary btn-sm" onclick="doLogout()" id="logout-btn" style="display:none">Sign out</button>
+      <button class="btn btn-primary btn-sm" onclick="goPage('menu')" id="order-btn">Pre-order now</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Pages ──────────────────────────────────────────────── -->
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="hero-eyebrow">Designed for high-demand campus environments</div>
+        <h1 class="hero-h1">Skip the queue.<br>Order ahead.<br><em>Eat smarter.</em></h1>
+        
+        <div class="hero-ctas">
+          <button class="btn btn-primary btn-lg" onclick="goPage('menu')">🍽 Browse Menu</button>
+          <button class="btn btn-secondary btn-lg" onclick="goPage('analytics')">📊 View Analytics</button>
+        </div>
+        <div class="hero-tags">
+          <span class="hero-tag">⚡ Pre-order from anywhere</span>
+          <span class="hero-tag">🤖 AI wait prediction</span>
+          <span class="hero-tag">🛡 JWT auth</span>
+        </div>
+      </div>
+      <div>
+        <div class="queue-card">
+          <div class="queue-label">🤖 Live Queue Insights — AI Simulation</div>
+          <div class="queue-time" id="home-wait">12</div>
+          <div class="queue-unit">minutes estimated wait</div>
+          <div class="queue-bar"><div class="queue-fill" id="home-fill" style="width:48%"></div></div>
+          <div class="queue-meta">
+            <span id="home-orders">25 active orders</span>
+            <span id="home-load">Moderate load</span>
+          </div>
+          <div class="order-pills">
+            <div class="order-pill">Random Forest model</div>
+            <div class="order-pill">Updates every 60s</div>
+            <div class="order-pill" id="home-time-pill">12:30 PM</div>
+          </div>
+          <div style="margin-top:14px;font-size:11px;color:rgba(255,255,255,.3);text-align:center;">AI-based predictions · demo mode</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section-pad">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:48px">
+        <div class="section-eyebrow">How it works</div>
+        <h2 class="section-h2" style="max-width:440px;margin:0 auto">Three steps from hungry to eating</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px">
+          <div style="width:40px;height:40px;background:var(--green-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px">📱</div>
+          <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Step 1</div>
+          <div style="font-family:var(--font-display);font-size:17px;font-weight:700;margin-bottom:10px">Browse &amp; Order</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.7">Select your food and place a pre-order from anywhere on campus — before you leave your classroom.</div>
+        </div>
+        <div style="background:var(--green);border-radius:var(--radius-lg);padding:28px">
+          <div style="width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px">🤖</div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Step 2</div>
+          <div style="font-family:var(--font-display);font-size:17px;font-weight:700;margin-bottom:10px;color:#fff">AI Predicts Wait Time</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.7">The Random Forest model analyzes live queue depth, time of day, and item complexity to predict your wait accurately.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px">
+          <div style="width:40px;height:40px;background:var(--green-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px">📧</div>
+          <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Step 3</div>
+          <div style="font-family:var(--font-display);font-size:17px;font-weight:700;margin-bottom:10px">Pick Up &amp; Go</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.7">Track your estimated wait time in real time and arrive at the counter at the right moment—no waiting, no guesswork.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Built for / Tech Stack -->
+  <section class="section-pad" style="padding-top:0">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px">
+          <div class="section-eyebrow" style="margin-bottom:16px">Built for</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <span style="font-size:18px;margin-top:1px">🎓</span>
+              <div><div style="font-weight:600;font-size:14px;margin-bottom:2px">Students</div><div style="font-size:13px;color:var(--muted)">Pre-order, track live status</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <span style="font-size:18px;margin-top:1px">🔑</span>
+              <div><div style="font-weight:600;font-size:14px;margin-bottom:2px">Admins</div><div style="font-size:13px;color:var(--muted)">Manage menu, advance order status, and view daily analytics</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px">
+          <div class="section-eyebrow" style="margin-bottom:16px">Tech Stack</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="hero-tag">Node.js</span>
+            <span class="hero-tag">Express</span>
+            <span class="hero-tag">MongoDB</span>
+            <span class="hero-tag">Socket.IO</span>
+            <span class="hero-tag">JWT</span>
+            <span class="hero-tag">Random Forest</span>
+            <span class="hero-tag">MVC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- MENU -->
+<div class="page" id="page-menu">
+  <div class="container section-pad">
+    <div style="margin-bottom:28px">
+      <h2 class="section-h2">Today's menu</h2>
+      <p style="color:var(--muted);font-size:15px">Pre-order now and skip the queue. Current wait: <strong id="menu-wait-inline" style="color:var(--green)">12 min</strong></p>
+    </div>
+    <div class="menu-layout">
+      <aside class="menu-sidebar">
+        <div class="sidebar-title">Categories</div>
+        <div id="sidebar-cats"></div>
+        <div class="queue-mini">
+          <div class="queue-mini-label">Current wait</div>
+          <div class="queue-mini-val" id="sidebar-wait">12</div>
+          <div class="queue-mini-sub">minutes if you order now</div>
+          <div style="height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:10px;overflow:hidden">
+            <div id="sidebar-bar" style="height:100%;background:#5DCAA5;border-radius:2px;width:48%;transition:width .5s"></div>
+          </div>
+        </div>
+      </aside>
+      <div class="menu-main">
+        <div class="menu-search">
+          <span style="font-size:18px">🔍</span>
+          <input type="text" id="menu-search-input" placeholder="Search dishes..." oninput="filterMenu()" aria-label="Search menu">
+        </div>
+        <div class="menu-grid" id="menu-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="page" id="page-cart">
+  <div class="container section-pad">
+    <h2 class="section-h2" style="margin-bottom:28px">Your cart</h2>
+    <div id="cart-page-content"></div>
+  </div>
+</div>
+
+<!-- ORDERS -->
+<div class="page" id="page-orders">
+  <div class="container section-pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
+      <div>
+        <h2 class="section-h2" id="orders-page-title">My orders</h2>
+        <p style="color:var(--muted);font-size:14px;margin-top:4px" id="orders-page-sub">Showing your personal orders</p>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="goPage('menu')">+ New order</button>
+    </div>
+    <div id="orders-list"></div>
+  </div>
+</div>
+
+<!-- ANALYTICS -->
+<div class="page" id="page-analytics">
+  <div class="container section-pad">
+    <div style="margin-bottom:32px">
+      <div class="section-eyebrow">Dashboard</div>
+      <h2 class="section-h2">Canteen analytics</h2>
+    </div>
+    <div class="analytics-grid" id="stat-cards"></div>
+    <div class="charts-row">
+      <div class="chart-box">
+        <div class="chart-title">Most ordered items</div>
+        <div id="popular-chart"></div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-title">Orders by hour</div>
+        <div class="hour-bars" id="hour-bars"></div>
+        <div class="h-labels" id="hour-labels"></div>
+        <div style="margin-top:10px;display:flex;gap:16px;font-size:12px;color:var(--muted)">
+          <span><span style="display:inline-block;width:10px;height:10px;background:var(--green);border-radius:2px;margin-right:4px"></span>Peak</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:#9FE1CB;border-radius:2px;margin-right:4px"></span>Off-peak</span>
+        </div>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Revenue — last 7 days (₹)</div>
+      <div style="display:flex;align-items:flex-end;gap:12px;height:120px;margin-bottom:8px" id="revenue-chart"></div>
+      <div style="display:flex;gap:12px" id="revenue-labels"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="page" id="page-admin">
+  <div class="container section-pad">
+    <div style="margin-bottom:28px">
+      <div class="section-eyebrow">Admin panel</div>
+      <h2 class="section-h2">Canteen management</h2>
+    </div>
+    <div class="admin-layout">
+      <div class="admin-card admin-card-full">
+        <div class="admin-card-title">Menu items <span class="tag tag-green" id="admin-avail-count"></span></div>
+        <div id="admin-menu-list"></div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-card-title">Live queue controls</div>
+        <div style="margin-bottom:14px">
+          <label style="font-size:13px;font-weight:500;display:block;margin-bottom:6px">Simulate active orders: <strong id="admin-slider-val">25</strong></label>
+          <input type="range" min="0" max="60" value="25" style="width:100%" id="admin-queue-slider" oninput="adminUpdateQueue(this.value)">
+        </div>
+        <div style="background:var(--text);border-radius:10px;padding:16px;color:#fff">
+          <div style="font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Predicted wait time</div>
+          <div style="font-family:var(--font-display);font-size:36px;font-weight:700;color:#5DCAA5" id="admin-wait-display">12</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.45)">minutes (ML model output)</div>
+        </div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-card-title">Recent orders</div>
+        <div id="admin-orders-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Login Modal ─────────────────────────────────────────── -->
+<div class="modal-bg" id="login-modal" role="dialog" aria-modal="true" aria-label="Sign in">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <div class="modal-title">Welcome back</div>
+    <div class="modal-sub">Sign in or create an account to pre-order</div>
+    <div class="tabs-bar">
+      <div class="tab-pill active" onclick="switchAuthTab('login',this)">Sign in</div>
+      <div class="tab-pill" onclick="switchAuthTab('signup',this)">Create account</div>
+    </div>
+    <div id="tab-login" class="tab-content active">
+      <div class="role-select">
+        <div class="role-pill active" onclick="setRole('student',this)">🎓 Student</div>
+        <div class="role-pill" onclick="setRole('admin',this)">🔑 Admin</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="student@college.edu" id="login-email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" placeholder="••••••••" id="login-pass">
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="doLogin()">Sign in</button>
+    </div>
+    <div id="tab-signup" class="tab-content">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First name</label>
+          <input class="form-input" type="text" placeholder="Ravi" id="signup-first">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last name</label>
+          <input class="form-input" type="text" placeholder="Kumar" id="signup-last">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">College email</label>
+        <input class="form-input" type="email" placeholder="ravi@college.edu" id="signup-email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Student ID</label>
+        <input class="form-input" type="text" placeholder="2024CS001" id="signup-id">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" placeholder="••••••••" id="signup-pass">
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="doSignup()">Create account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Toast ───────────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<!-- ─── Footer ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">🥗 SmartCanteen</div>
+        <div class="footer-desc">AI-powered canteen pre-order system. Reduce wait times, improve dining efficiency, and make every lunch break count.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Student</div>
+        <a class="footer-link" onclick="goPage('menu')">Browse menu</a>
+        <a class="footer-link" onclick="goPage('cart')">My cart</a>
+        <a class="footer-link" onclick="goPage('orders')">Track order</a>
+      </div>
+      <div>
+        <div class="footer-col-title">System</div>
+        <a class="footer-link" onclick="goPage('analytics')">Analytics</a>
+        <a class="footer-link" onclick="goPage('admin')">Admin panel</a>
+        <a class="footer-link" onclick="openLogin()">Sign in</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SmartCanteen. Built with Node.js + Express + MongoDB + Socket.IO</span>
+      <span>JWT Authentication · Random Forest Queue Model</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+
+<script src="app.js"></script>
+</body>
+</html>
